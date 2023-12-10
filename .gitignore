@@ -32,3 +32,17 @@
 *.app
 
 **/pt*
+
+.venv
+__pycache__
+*.log
+*.tex
+task
+
+.cookie_secret
+
+data.dat
+task.html
+
+*.egg-info
+libs/**/build
