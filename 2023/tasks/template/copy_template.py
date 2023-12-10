@@ -1,7 +1,6 @@
 import glob
 import os
 
-
 def main():
     interesting_files = ['task.dat','solution.py','data.dat','test_solution.py']
     existing = glob.glob('../*')
@@ -12,6 +11,6 @@ def main():
             for f in interesting_files:
                 execution = f'cp {f} {folder_name}/{f}'
                 os.system(execution)
-            
+
 if __name__ == "__main__":
     main()
