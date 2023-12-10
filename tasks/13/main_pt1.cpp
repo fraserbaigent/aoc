@@ -13,7 +13,7 @@ void runAllTests() {
 
 int main()
 {
-    //runAllTests();
+    runAllTests();
     int answer = Solver::solveMain("data.dat");
     std::cout << "Answer is: " << answer << "\n";
     return 0;
