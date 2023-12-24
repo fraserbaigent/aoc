@@ -1,0 +1,52 @@
+* Part 2
+\begin{aligned}
+x(t) = x_0 + v_x~t\\
+y(t) = y_0 + v_y~t\\
+z(t) = z_0 + v_z~t
+\end{aligned}
+
+rearrange:
+
+\begin{aligned}
+x_0 = x(t) - v_x~t\\
+y_0 = y(t) - v_y~t\\
+z_0 = z(t) - v_z~t
+\end{aligned}
+
+Let's say there's just one other line ($0$), plus our's ($A$):
+
+\begin{aligned}
+x_A(t) = x_{A,0} + v_{A,x}~t\\
+y_A(t) = y_{A,0} + v_{A,y}~t\\
+z_A(t) = z_{A,0} + v_{A,z}~t\\
+x_0(t) = x_{0,0} + v_{0,x}~t\\
+y_0(t) = y_{0,0} + v_{0,y}~t\\
+z_0(t) = z_{0,0} + v_{0,z}~t\\
+\end{aligned}
+
+Eliminating $t$ via the generic eq:
+\begin{equation}
+t = \frac{(x(t) - x_0)}{v_x}
+\end{equation}
+
+\begin{align}
+\frac{(x_A(t) - x_{A,0})}{v_{A,x}}=\frac{(x_0(t)-x_{0,0})}{v_{0,x}}
+\end{align}
+We are looking for the case when $x_A(t) == x_0(t) = x(t)$. Letting $m = v_{A,x}/v_{0,x}$:
+\begin{align}
+\frac{(x(t) - x_{A,0})}{v_{A,x}}&=\frac{(x(t) - x_{0,0})}{v_{0,x}}\\
+x(t) (1 - m)&=x_{A,0} - mx_{0,0}\\
+x(t) &= \frac{x_{A,0}- m~x_{0,0}}{1-m}
+\end{align}
+
+This is generalised for 1-D, for a single hailstone. So for each hailstone and the line we have a set of 3 equations.\\
+From this, we want to find the initial conditions of the line - $x_{A,0}, v_{A,0}$ etc.
+\begin{align}
+1 = \frac{(x - x_{0,0}) v_{A,x}}{(x - x_{A,0})v_{0,x}}
+\end{align}
+
+fitting a curve for calculting a sensible $\beta$ value to give an initial probability of 0.8 for a median value:
+\begin{align}
+P = \exp{\left(\frac{-\Delta~x}{\beta}\right)}\\
+\beta = \frac{-\Delta~\bar{x}}{\ln{0.8}}
+\end{align}
