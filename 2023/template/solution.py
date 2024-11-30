@@ -5,7 +5,7 @@ import re
 
 def get_data(data_file) -> list:
     with open(data_file, "r") as infile:
-        return [l.strip() for l in infile.readlines()]
+        return [l.strip() for l in infile.readlines() if l.strip() != ""]
 
 def to_submit():       
     if len(sys.argv) == 1:
