@@ -46,3 +46,4 @@ task.html
 
 *.egg-info
 libs/**/build
+cached_leaderboard_*

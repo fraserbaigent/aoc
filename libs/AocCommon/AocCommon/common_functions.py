@@ -59,10 +59,11 @@ def get_date_data():
     return res.groups()[0], res.groups()[1]
     
 def submit(answer : str,
-           question : str):
-    year, day = get_date_data()
+           question : str,
+           year : int,
+           day : int):
     url = f"https://adventofcode.com/{year}/day/{day}/answer"
-    session_cookie = get_cookie()    
+    session_cookie = "Nope"
     headers = {
         "User-Agent": f"aoc agent {year}",
         "Cookie": f"session={session_cookie}",
@@ -72,4 +73,12 @@ def submit(answer : str,
     response = requests.post(url, data=payload, headers=headers)
     print(f"Response: {response.status_code}: \n", response.text)
     
+def get_league_data_from_api(league_id, year):
+    uri = f"https://adventofcode.com/{year}/leaderboard/private/view/{league_id}.json"
+    session_cookie = get_cookie(".cookie_secret")
+    headers = {
+        "User-Agent": f"aoc agent {year}",
+        "Cookie": f"session={session_cookie}",
+    }
     
+    return requests.get(uri, headers=headers).json()
