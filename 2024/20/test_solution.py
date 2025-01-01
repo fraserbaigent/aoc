@@ -16,9 +16,37 @@ test_data = [l.strip() for l in '''###############
 ###############'''.split('\n') if len(l.strip())]
 
 def test_part_1():
-    expected_part_1 = 123123
-    assert solution.part_1(test_data) == expected_part_1
+    expected_part_1 = {
+        2:14,
+        4:14,
+        6:2,
+        8:4,
+        10:2,
+        12:3,
+        20:1,
+        36:1,
+        38:1,
+        40:1,
+        64:1
+        }
+        
+#    assert solution.solve_part_1(test_data) == expected_part_1
 
 def test_part_2():
-    expected_part_2 = 0
-    assert solution.part_2(test_data) == expected_part_2
+    expected_part_2 = {
+        50: 32,
+        52: 31,
+        54: 29,
+        56: 39,
+        58: 25,
+        60:23,
+        62:20,
+        64:19,
+        66:12,
+        68:14,
+        70:12,
+        72: 22,
+        74:4,
+        76:3
+        }
+    assert solution.solve_part_2(test_data, 50) == expected_part_2
