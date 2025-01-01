@@ -86,16 +86,14 @@ def cheat(start, lookup, limit):
     savings = dict()
     while len(to_go):
         (x, y), t = to_go.pop(0)
-        if (x, y) in seen:
-            continue
-        if t > limit or (x, y) in savings:
+        if (x, y) in seen or t > limit:
             continue
 
         seen.add((x, y))
         if t > 0 and (x, y) in lookup:
             saving = lookup[start] - (lookup[(x, y)] + t)
             savings[(x, y)] = saving
-            continue
+
         for dx, dy in DIRS:
             nx = x + dx
             ny = y + dy
@@ -119,9 +117,6 @@ def solve_part_2(data, minimum=0):
 
 def part_1(data):
     scores = solve_part_1(data)
-    for s in sorted(scores, reverse=True):
-        if s >= 100:
-            print(s, scores[s])
     total = sum([v for s, v in scores.items() if s >= 100])
     print(f"Part 1: {total}")
     return total
