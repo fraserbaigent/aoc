@@ -34,10 +34,11 @@ def get_data_from_cache_or_api(league_id, year):
 
 data = get_data_from_cache_or_api(2257599, 2025)
 
+special_names = ['fraserbaigent','spencermehta']
 user_map = {}
 for _, m in data["members"].items():
     name = m["name"]
-    if name is None:
+    if name is None or (len(special_names) > 0 and name not in special_names):
         continue
     for day, dat in m["completion_day_level"].items():
         if name not in user_map:
@@ -51,7 +52,17 @@ for _, m in data["members"].items():
                     times[v], datetime.timezone.utc
                 ).strftime("%H:%M %Y-%m-%d")
         if times[0] is not None and times[1] is not None:
-            d["Star 2 Time"] = times[1] - times[0]
+            star_time = times[1] - times[0]
+            star_time_days = star_time // 86400
+            star_time_hrs = (star_time % 86400) // 3600
+            star_time_mins = (star_time % 3600) // 60
+            star_time_seconds = star_time % 60
+            day_str = f'{star_time_days:>3} day{"" if star_time_days == 1 else "s"} ' if star_time_days > 0 else ""
+            hr_str = f'{star_time_hrs:>2} hr{" " if star_time_hrs == 1 else "s"} ' if (star_time_days > 0 or star_time_hrs > 0) else ""
+            min_str = f'{star_time_mins:>2} min{" " if star_time_mins == 1 else "s"} ' if (star_time_days > 0 or star_time_hrs > 0 or star_time_mins > 0) else ""
+            sec_str = f'{star_time_seconds:>2}s'
+            d["Star 2 Time"] = f'{day_str}{hr_str}{min_str}{sec_str}'
+            d["Star 2 Time Seconds"] = star_time
         user_map[name][day] = d
 
 day = 0
@@ -61,10 +72,10 @@ while True:
     for u, ud in user_map.items():
         if str(day) in ud:
             if "Star 2 Time" in ud[str(day)]:
-                times.append((u, ud[str(day)]["Star 2 Time"]))
+                times.append((u, ud[str(day)]["Star 2 Time"], ud[str(day)]["Star 2 Time Seconds"]))
     if len(times) == 0:
         break
     print(f"Day {day}")
-    for i in sorted(times, key=lambda k: k[1]):
-        print(f"{i[0]:>30} | {i[1]:>8}")
+    for i in sorted(times, key=lambda k: k[2]):
+        print(f"{i[0]:>30} | {i[1].strip()}")
 # print(json.dumps(user_map, indent=4))
