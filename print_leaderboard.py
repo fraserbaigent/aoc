@@ -32,7 +32,7 @@ def get_data_from_cache_or_api(league_id, year):
     return data
 
 
-data = get_data_from_cache_or_api(2257599, 2024)
+data = get_data_from_cache_or_api(2257599, 2025)
 
 user_map = {}
 for _, m in data["members"].items():
