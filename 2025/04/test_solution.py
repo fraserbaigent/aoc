@@ -1,0 +1,22 @@
+from AocCommon import data_to_list_grid, get_data, get_data_blob, split_data_with_regex
+import solution
+test_data = [l.strip() for l in '''..@@.@@@@.
+@@@.@.@.@@
+@@@@@.@.@@
+@.@@@@..@.
+@@.@@@@.@@
+.@@@@@@@.@
+.@.@.@.@@@
+@.@@@.@@@@
+.@@@@@@@@.
+@.@.@@@.@.
+
+'''.split('\n') if len(l.strip())]
+test_data = data_to_list_grid(test_data)
+def test_part_1():
+    expected_part_1 = 13
+    assert solution.part_1(test_data) == expected_part_1
+
+def test_part_2():
+    expected_part_2 = 43
+    assert solution.part_2(test_data) == expected_part_2
